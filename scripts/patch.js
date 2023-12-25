@@ -9,7 +9,6 @@ function patchPackageJson() {
   packageJson['types'] = './src/cli.d.ts';
 
   fs.writeFileSync(packageJsonPath, JSON.stringify(packageJson, null, 2));
-  fs.writeFileSync(packageJsonPath + '1', JSON.stringify(packageJson, null, 2));
 }
 
 patchPackageJson();
