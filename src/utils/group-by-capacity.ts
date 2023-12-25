@@ -18,14 +18,17 @@ export function groupBy<Item, Key extends string | number | symbol, Result>(
   items: Item[],
   groupFn: (item: Item) => [Key, Result]
 ) {
-  return items.reduce((acc, item) => {
-    const [key, group] = groupFn(item);
+  return items.reduce(
+    (acc, item) => {
+      const [key, group] = groupFn(item);
 
-    if (!acc[key]) {
-      acc[key] = [];
-    }
-    acc[key].push(group);
+      if (!acc[key]) {
+        acc[key] = [];
+      }
+      acc[key].push(group);
 
-    return acc;
-  }, {} as Record<Key, Result[]>);
+      return acc;
+    },
+    {} as Record<Key, Result[]>
+  );
 }

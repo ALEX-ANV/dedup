@@ -1,4 +1,4 @@
-import { OutputStream, execute } from '../utils/execute';
+import { execute, OutputStream } from '../utils/execute';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 export async function getRemoteMeta<T = any>(

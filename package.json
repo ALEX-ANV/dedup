@@ -1,12 +1,12 @@
 {
-  "name": "@dedup/source",
+  "name": "@dedup/cli",
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
     "build": "nx build --skip-nx-cache",
-    "debug": "npm run build && node dist/dedup/bin/dedup.js",
-    "build:prod": "nx build --prod && pnpx tsc --emitDeclarationOnly --outDir dist/dedup",
+    "debug": "npm run build:prod && node dist/dedup/bin/dedup.js",
+    "build:prod": "nx build --prod && npx tsc -p tsconfig.types.json --outDir dist/dedup",
     "test": "nx test"
   },
   "private": true,
@@ -32,8 +32,8 @@
     "@types/jest": "29.5.11",
     "@types/node": "20.10.5",
     "@types/semver": "7.5.6",
-    "@typescript-eslint/eslint-plugin": "6.15.0",
-    "@typescript-eslint/parser": "6.15.0",
+    "@typescript-eslint/eslint-plugin": "6.16.0",
+    "@typescript-eslint/parser": "6.16.0",
     "esbuild": "0.19.10",
     "eslint": "8.56.0",
     "eslint-config-prettier": "9.1.0",

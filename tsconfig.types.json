@@ -1,0 +1,13 @@
+{
+  // Change this to match your project
+  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"],
+  "include": ["src/**/*.ts"],
+  "compilerOptions": {
+    "rootDir": ".",
+    "declaration": true,
+    "emitDeclarationOnly": true,
+    "moduleResolution": "node",
+    "declarationMap": false,
+    "sourceMap": false
+  }
+}

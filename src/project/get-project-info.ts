@@ -1,6 +1,6 @@
 import { join } from 'node:path';
 import { ProjectInfo } from '../types/project-info';
-import { PackageJson } from 'src/types/package-json';
+import { PackageJson } from '../types/package-json';
 
 export async function getProjectInfo(dir: string): Promise<ProjectInfo | null> {
   const load = (await import('load-json-file')).loadJsonFile;

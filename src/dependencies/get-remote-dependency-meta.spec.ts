@@ -59,6 +59,8 @@ describe(getRemoteMeta.name, () => {
     const mockExecute = execute as jest.MockedFunction<typeof execute>;
     mockExecute.mockRejectedValueOnce(new Error('test error'));
 
-    await expect(getRemoteMeta('test-dependency')).rejects.toThrow('test error');
+    await expect(getRemoteMeta('test-dependency')).rejects.toThrow(
+      'test error'
+    );
   });
 });
