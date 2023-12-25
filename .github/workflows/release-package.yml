@@ -5,7 +5,7 @@ on:
     types: [created]
 
 jobs:
-  publish-gpr:
+  publish:
     runs-on: ubuntu-latest
     permissions:
       packages: write
@@ -16,6 +16,7 @@ jobs:
         with:
           node-version: '20.x'
           registry-url: 'https://registry.npmjs.org'
+      - run: npm install -g pnpm
       - run: pnpm i
       - run: npm run deploy
       - run: npm publish --dry-run
