@@ -20,4 +20,6 @@ npm install dedup -g
 
 2. Run the package in the repository
 
+```bash
 npx dedup
+```
