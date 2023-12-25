@@ -19,11 +19,11 @@
     "tslib": "2.6.2"
   },
   "bin": {
-    "dup": "./bin/dedup.js"
+    "dedup": "./bin/dedup.js"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ALEX-ANV/dedup.git"
+    "url": "git+https://github.com/ALEX-ANV/dedup.git"
   },
   "devDependencies": {
     "@nx/esbuild": "17.2.7",
