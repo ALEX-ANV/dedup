@@ -2,6 +2,7 @@
 
 # compiled output
 dist
+!dist/dedup
 tmp
 /out-tsc
 
