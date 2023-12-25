@@ -21,6 +21,10 @@
   "bin": {
     "dup": "./bin/dedup.js"
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ALEX-ANV/dedup.git"
+  },
   "devDependencies": {
     "@nx/esbuild": "17.2.7",
     "@nx/eslint": "17.2.7",
