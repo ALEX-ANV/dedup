@@ -7,16 +7,21 @@
     "build": {
       "executor": "@nx/esbuild:esbuild",
       "outputs": ["{options.outputPath}"],
-      "defaultConfiguration": "production",
+      "defaultConfiguration": "development",
       "options": {
         "platform": "node",
         "outputPath": "dist/dedup",
-        "format": ["cjs"],
         "bundle": false,
-        "main": "src/main.ts",
+        "main": "src/cli.ts",
         "tsConfig": "tsconfig.app.json",
-        "assets": ["src/assets"],
-        "generatePackageJson": true,
+        "assets": [
+          {
+            "glob": "**/*",
+            "input": "bin",
+            "output": "./bin"
+          }
+        ],
+        "format": ["cjs"],
         "esbuildOptions": {
           "sourcemap": true,
           "outExtension": {
@@ -25,9 +30,16 @@
         }
       },
       "configurations": {
-        "development": {},
+        "development": {
+          "esbuildOptions": {
+            "sourcemap": true,
+            "outExtension": {
+              ".js": ".js"
+            }
+          }
+        },
         "production": {
-          "generateLockfile": true,
+          "minify": true,
           "esbuildOptions": {
             "sourcemap": false,
             "outExtension": {
@@ -65,10 +77,6 @@
       "options": {
         "jestConfig": "jest.config.ts"
       }
-    },
-    "docker-build": {
-      "dependsOn": ["build"],
-      "command": "docker build -f Dockerfile . -t dedup"
     }
   },
   "tags": []
