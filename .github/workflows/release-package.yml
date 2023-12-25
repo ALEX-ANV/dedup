@@ -2,7 +2,7 @@ name: Pubish to NPM
 
 on:
   release:
-    types: [created]
+    types: [created, published]
 
 jobs:
   publish-gpr:
