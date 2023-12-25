@@ -7,7 +7,9 @@
     "build": "nx build --skip-nx-cache",
     "debug": "npm run build:prod && node dist/dedup/bin/dedup.js",
     "build:prod": "nx build --prod && npx tsc -p tsconfig.types.json --outDir dist/dedup",
-    "test": "nx test"
+    "test": "nx test",
+    "deploy": "nx deploy",
+    "patch": "node ./scripts/patch.js"
   },
   "private": true,
   "dependencies": {

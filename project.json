@@ -45,7 +45,8 @@
             "outExtension": {
               ".js": ".js"
             }
-          }
+          },
+          "generatePackageJson": true
         }
       }
     },
@@ -76,6 +77,20 @@
       "outputs": ["{workspaceRoot}/coverage/{projectName}"],
       "options": {
         "jestConfig": "jest.config.ts"
+      }
+    },
+    "deploy": {
+      "executor": "nx:run-commands",
+      "options": {
+        "commands": [
+          {
+            "command": "npm run build:prod"
+          },
+          {
+            "command": "npm run patch"
+          }
+        ],
+        "parallel": false
       }
     }
   },
