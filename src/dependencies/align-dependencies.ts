@@ -6,6 +6,7 @@ import { downloadDependenciesMeta } from './download-dependencies-meta';
 import { checkMatchingRootVersionWithPeerDependencies } from './check-match-peer-dependencies-with-installed';
 import { groupBy } from '../utils/group-by-capacity';
 import { getVersionsInfoInRange } from './get-version-info-in-range';
+import { sort } from 'semver';
 
 function makeDictionary(dependencies: Record<string, DependencyRemoteMeta>) {
   const data: Record<string, DepDictionary> = {};
@@ -58,8 +59,10 @@ export async function alignDependencies(
   });
 
   const dictionary = makeDictionary(deps);
-  const notMatchedDependencies =
-    checkMatchingRootVersionWithPeerDependencies(dictionary);
+  const notMatchedDependencies = checkMatchingRootVersionWithPeerDependencies(
+    dictionary,
+    logger
+  );
 
   if (!notMatchedDependencies.length) {
     return;
@@ -76,40 +79,14 @@ export async function alignDependencies(
       throw new Error(`Dependency ${packageName} not found`);
     }
 
-    if (versions.length === 1) {
-      dep.version = formatSemver(
-        getVersionsInfoInRange(versions[0], deps[packageName]?.versions ?? [])
-          .max
-      );
-      dep.latest = true;
-      logger.next(`Installing: ${packageName}@${dep.version}`);
-      continue;
-    }
+    const sortedMaxVersions = sort(
+      versions.map(
+        (version) =>
+          getVersionsInfoInRange(version, deps[packageName]?.versions ?? []).max
+      )
+    );
 
-    const versionToInstall = versions
-      .map((version) => {
-        return getVersionsInfoInRange(
-          version,
-          deps[packageName]?.versions ?? []
-        );
-      })
-      .reduce((acc, item) => {
-        if (item.min.compare(acc.min) === 1) {
-          acc.min = item.min;
-        }
-
-        if (item.max.compare(acc.max) === -1) {
-          acc.max = item.max;
-        }
-
-        acc.versions = acc.versions.filter((version) =>
-          item.versions.some((it) => it.compare(version) === 0)
-        );
-
-        return acc;
-      });
-
-    dep.version = formatSemver(versionToInstall.max);
+    dep.version = formatSemver(sortedMaxVersions[0]);
     dep.latest = true;
     logger.next(`Installing: ${packageName}@${dep.version}`);
   }

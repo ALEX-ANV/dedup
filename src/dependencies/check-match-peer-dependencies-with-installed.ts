@@ -3,9 +3,11 @@ import { DepDictionary } from '../types/project-info';
 import { getVersionsInfoInRange } from './get-version-info-in-range';
 import { getPreviousVersion } from './get-previous-version';
 import { formatSemver } from './get-formatted-semver-version';
+import { Logger } from '../logger/logger-factory';
 
 export function checkMatchingRootVersionWithPeerDependencies(
-  dictionary: Record<string, DepDictionary>
+  dictionary: Record<string, DepDictionary>,
+  logger: Logger
 ) {
   const packages = Object.entries(dictionary);
 
@@ -37,7 +39,7 @@ export function checkMatchingRootVersionWithPeerDependencies(
         if (!satisfies(rootVersion, dep.needs)) {
           const dependencyInfo = getVersionsInfoInRange(dep.needs, versions);
 
-          console.log(
+          logger.next(
             `Not matched version for dependency ${name}@${version} with version ${dep.needs} for package ${dep.name}@${dep.version}`
           );
 
@@ -48,7 +50,7 @@ export function checkMatchingRootVersionWithPeerDependencies(
             });
           } else {
             const previousVersion = getPreviousVersion(
-              dep,
+              dep.version,
               dictionary[dep.name].remoteVersions,
               'minor'
             );
@@ -61,7 +63,7 @@ export function checkMatchingRootVersionWithPeerDependencies(
         }
       } else if (valid(dep.needs)) {
         if (rootVersion.compare(dep.needs) !== 0) {
-          console.log(
+          logger.next(
             `Not matched version for dependency ${name}@${version} with version ${dep.needs} for package ${dep.name}@${dep.version}`
           );
 
@@ -71,7 +73,7 @@ export function checkMatchingRootVersionWithPeerDependencies(
           });
         }
       } else {
-        console.log(`Unknown version for dependency ${name}: ${dep.needs}`);
+        logger.warn(`Unknown version for dependency ${name}: ${dep.needs}`);
       }
     }
   }

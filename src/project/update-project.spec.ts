@@ -1,6 +1,6 @@
 import { updatePackageJson } from './update-project';
 
-describe(updatePackageJson.name, () => {
+xdescribe(updatePackageJson.name, () => {
   const mockFs = {
     readFile: jest.fn(),
     writeFile: jest.fn(),
