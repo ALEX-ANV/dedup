@@ -15,7 +15,7 @@ To use Dedup, follow these steps:
 1. Install the package using npm:
 
 ```bash
-npm install dedup -g
+npm install @dedup/cli -g
 ```
 
 2. Run the package in the repository
