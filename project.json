@@ -19,7 +19,8 @@
             "glob": "**/*",
             "input": "bin",
             "output": "./bin"
-          }
+          },
+          "README.md"
         ],
         "format": ["cjs"],
         "esbuildOptions": {
@@ -79,7 +80,7 @@
         "jestConfig": "jest.config.ts"
       }
     },
-    "deploy": {
+    "publish": {
       "executor": "nx:run-commands",
       "options": {
         "commands": [

@@ -1,6 +1,6 @@
 {
   "name": "@dedup/cli",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "license": "MIT",
   "scripts": {
     "start": "nx serve",
@@ -8,7 +8,7 @@
     "debug": "npm run build && node dist/dedup/bin/dedup.js /Users/alinayarets/Projects/codelab",
     "build:prod": "nx build --prod --skip-nx-cache && npx tsc -p tsconfig.types.json --outDir dist/dedup",
     "test": "nx test",
-    "deploy": "nx deploy",
+    "publish": "nx publish",
     "patch": "node ./scripts/patch.js",
     "prepare": "is-ci || husky install",
     "lint": "nx lint",

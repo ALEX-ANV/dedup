@@ -18,7 +18,7 @@ jobs:
           registry-url: 'https://registry.npmjs.org'
       - run: npm install -g pnpm
       - run: pnpm i
-      - run: npm run deploy
+      - run: npm run publish
       - run: npm publish ./dist/dedup --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
