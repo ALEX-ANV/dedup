@@ -2,6 +2,9 @@ import { alignDependencies } from './dependencies/align-dependencies';
 import { createLoggerAsync } from './logger/logger-factory';
 import { getProjectInfo } from './project/get-project-info';
 import { updatePackageJson } from './project/update-project';
+import { getTreeDependencies } from './dependencies/get-tree-dependencies';
+import fs from 'node:fs';
+import * as path from 'path';
 
 async function main() {
   const logger = await createLoggerAsync();
@@ -16,6 +19,14 @@ async function main() {
       logger.fail('No project found');
       process.exit(1);
     }
+
+    const tree = await getTreeDependencies(projectInfo);
+
+    fs.writeFileSync(
+      path.join(dir, 'tree.json'),
+      JSON.stringify(tree, null, 2)
+    );
+    debugger;
 
     const depLogger = logger.start('Aligning dependencies...');
     await alignDependencies(projectInfo.dependencies, depLogger);

@@ -8,7 +8,10 @@ describe(getRemoteMeta.name, () => {
     const mockExecute = execute as jest.MockedFunction<typeof execute>;
     mockExecute.mockResolvedValueOnce(JSON.stringify({ version: '1.2.3' }));
 
-    const result = await getRemoteMeta('test-dependency', '1.2.3');
+    const result = await getRemoteMeta('test-dependency', '1.2.3', [
+      'peerDependencies',
+      'versions',
+    ]);
 
     expect(mockExecute).toHaveBeenCalledWith(
       'npm',
@@ -30,7 +33,10 @@ describe(getRemoteMeta.name, () => {
     const mockExecute = execute as jest.MockedFunction<typeof execute>;
     mockExecute.mockResolvedValueOnce(JSON.stringify({ version: '1.2.3' }));
 
-    const result = await getRemoteMeta('test-dependency');
+    const result = await getRemoteMeta('test-dependency', 'latest', [
+      'peerDependencies',
+      'versions',
+    ]);
 
     expect(mockExecute).toHaveBeenCalledWith(
       'npm',

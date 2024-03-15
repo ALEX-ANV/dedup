@@ -39,7 +39,10 @@ async function getCachedRemoteData(
   if (DEPS_CACHE.has(key)) {
     return Promise.resolve(DEPS_CACHE.get(key));
   }
-  const meta = await getRemoteMeta(name, version);
+  const meta = await getRemoteMeta(name, version, [
+    'peerDependencies',
+    'versions',
+  ]);
 
   DEPS_CACHE.set(key, meta);
 
