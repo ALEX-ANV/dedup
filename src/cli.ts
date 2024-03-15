@@ -3,8 +3,8 @@ import { createLoggerAsync } from './logger/logger-factory';
 import { getProjectInfo } from './project/get-project-info';
 import { updatePackageJson } from './project/update-project';
 import { getTreeDependencies } from './dependencies/get-tree-dependencies';
-import fs from 'node:fs';
-import * as path from 'path';
+import fs from 'node:fs/promises';
+import path from 'node:path';
 
 async function main() {
   const logger = await createLoggerAsync();
@@ -22,11 +22,10 @@ async function main() {
 
     const tree = await getTreeDependencies(projectInfo);
 
-    fs.writeFileSync(
+    await fs.writeFile(
       path.join(dir, 'tree.json'),
       JSON.stringify(tree, null, 2)
     );
-    debugger;
 
     const depLogger = logger.start('Aligning dependencies...');
     await alignDependencies(projectInfo.dependencies, depLogger);

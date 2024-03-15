@@ -1,8 +1,6 @@
-import { promises } from 'node:fs';
+import fs from 'node:fs/promises';
 import { InstalledPackageInfo } from '../types/installed-package';
 import { PackageJson } from '../types/package-json';
-
-const fs = promises;
 
 export async function updatePackageJson(
   dir: string,
