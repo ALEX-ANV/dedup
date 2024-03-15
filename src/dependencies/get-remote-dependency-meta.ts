@@ -30,8 +30,7 @@ export async function getRemoteMeta<T extends Fields[]>(
     OutputStream.PIPE
   )
     .then((output) => JSON.parse(output) as DependencyEntity & Additional<T>)
-    .catch((err) => {
-      console.error(err);
+    .catch(() => {
       return {
         version,
         name: dependency,

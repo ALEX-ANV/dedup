@@ -7,7 +7,7 @@
     "build": "nx build --skip-nx-cache",
     "debug": "npm run build && node dist/dedup/bin/dedup.js /Users/alinayarets/Projects/codelab",
     "build:prod": "nx build --prod --skip-nx-cache && npx tsc -p tsconfig.types.json --outDir dist/dedup",
-    "test": "nx test",
+    "test": "nx test --skip-nx-cache",
     "publish": "nx publish",
     "patch": "node ./scripts/patch.js",
     "prepare": "is-ci || husky install",
