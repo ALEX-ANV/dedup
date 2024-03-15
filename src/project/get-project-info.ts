@@ -8,7 +8,7 @@ import { exists } from '../utils/exists-file';
 export async function getProjectInfo(dir: string): Promise<ProjectInfo | null> {
   const load = (await import('load-json-file')).loadJsonFile;
   try {
-    const packageJson = await load<PackageJson>(join(dir, 'package.json'));
+    const packageJson = await load<PackageJson>(path.join(dir, 'package.json'));
     const packageLockPath = path.join(dir, 'package-lock.json');
     const ignoredDependencies = await getIgnoredDependencies(dir);
 
