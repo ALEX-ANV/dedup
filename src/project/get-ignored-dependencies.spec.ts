@@ -6,7 +6,7 @@ jest.mock('node:fs/promises', () => ({
   access: jest.fn().mockResolvedValue(true),
 }));
 
-describe('getIgnoredDependencies', () => {
+describe(getIgnoredDependencies.name, () => {
   afterEach(() => {
     jest.resetAllMocks();
   });
